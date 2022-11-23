@@ -1,0 +1,186 @@
+# This file defines the content types on the website. See the documentation for
+# details: https://docs.bolt.cm/contenttypes/intro
+
+courses:
+  name: Courses
+  singular_name: Course
+  fields:
+    title:
+      type: text
+      class: large
+      group: content
+      required: true
+    language:
+      type: text
+      class: large
+      group: content
+    description:
+      type: text
+      group: content
+      required: true
+    file:
+      type: file
+      label: Moodle File
+      group: content
+      # If you add more file types, make sure they are available in config.yml accept_file_types
+      extensions: [ html5, h5p, mbz, zip ]
+      required: true
+  taxonomy: [ tags ]
+  icon_many: "fa:chalkboard-teacher"
+  icon_one: "fa:chalkboard-teacher"
+
+categories:
+  name: Categories
+  singular_name: Category
+  fields:
+    name:
+      type: text
+      class: large
+      group: content
+      localize: true
+      required: true
+    slug:
+      type: slug
+      uses: name
+      group: Meta
+  icon_many: "fa:list-alt"
+  icon_one: "fa:list-alt"
+  locales: ['en', 'es']
+
+collections:
+  name: Collections
+  singular_name: Collection
+  fields:
+    title:
+      type: text
+      class: large
+      group: content
+      localize: true
+      required: true
+    description:
+      type: textarea
+      group: content
+      localize: true
+      required: true
+    image:
+      type: image
+      label: Feature Image
+      group: content
+      localize: true
+      required: true
+    recommended:
+      label: 'Recommended?'
+      type: select
+      values:
+        no: No
+        yes: Yes
+      default: no
+      required: true
+    slug:
+      type: slug
+      uses: title
+      group: Meta
+  relations:
+    categories:
+      multiple: true
+      order: name
+      label: Select Categories
+      group: content
+    episodes:
+      multiple: true
+      order: title
+      label: Add Episodes
+      group: content
+  taxonomy: [ media_type, packages, tags ]
+  icon_many: "fa:layer-group"
+  icon_one: "fa:layer-group"
+  locales: ['en', 'es']
+
+episodes:
+  name: Episodes
+  singular_name: Episode
+  fields:
+    title:
+      type: text
+      class: large
+      group: content
+      localize: true
+      required: true
+    description:
+      type: textarea
+      group: content
+      localize: true
+      required: true
+    image:
+      type: image
+      label: Feature Image
+      group: content
+      localize: true
+      required: true
+    file:
+      type: file
+      label: Media File
+      group: content
+      localize: true
+    slug:
+        type: slug
+        uses: title
+        group: Meta
+  relations:
+    collections:
+      multiple: false
+      order: title
+      label: Collection
+      required: true
+  taxonomy: [ media_type, tags ]
+  icon_many: "fa:photo-video"
+  icon_one: "fa:photo-video"
+  locales: ['en', 'es']
+
+singles:
+  name: Singles
+  singular_name: Single
+  fields:
+    title:
+      type: text
+      class: large
+      group: content
+      localize: true
+      required: true
+    description:
+      type: textarea
+      group: content
+      localize: true
+      required: true
+    image:
+      type: image
+      label: Feature Image
+      group: content
+      localize: true
+      required: true
+    file:
+      type: file
+      label: Media File
+      group: content
+      localize: true
+    recommended:
+      label: 'Recommended?'
+      type: select
+      values:
+        no: No
+        yes: Yes
+      default: no
+      required: true
+    slug:
+        type: slug
+        uses: title
+        group: Meta
+  relations:
+    categories:
+      multiple: true
+      order: name
+      label: Select Categories
+  taxonomy: [ media_type, packages, tags ]
+  icon_many: "fa:square"
+  icon_one: "fa:square"
+  locales: ['en', 'es']

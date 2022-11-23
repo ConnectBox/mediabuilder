@@ -1,0 +1,13 @@
+[
+{% for file in media %}
+    {
+        "date": "{{ file.exportDate }}",
+        "filename": "{{ file.filename }}",
+        "filepath": "{{ absolute_url(file.publicPath) }}",
+        "is_slim": {{ file.isSlim | json_encode }},
+        "package": "{{ file.package.name }}",
+        "timestamp": {{ file.exportTimestamp }}
+    }
+    {% if (loop.last) %}{% else %},{% endif %}
+{% endfor %}
+]
