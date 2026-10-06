@@ -17,9 +17,12 @@ services:
       - db-data:/var/lib/mysql:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/mysql:rw
+    # All ports localhost only: the server's nginx serves bolt.<url> from 3000;
+    # MySQL and mailcatcher must never be reachable from outside.
     ports:
       - target: 3306
         published: 33306
+        host_ip: 127.0.0.1
         protocol: tcp
 
   php:
@@ -61,6 +64,7 @@ services:
     ports:
       - target: 80
         published: 3000
+        host_ip: 127.0.0.1
         protocol: tcp
 
   mailcatcher:
@@ -73,6 +77,7 @@ services:
     ports:
       - target: 1080
         published: 1080
+        host_ip: 127.0.0.1
         protocol: tcp
 
 volumes:
